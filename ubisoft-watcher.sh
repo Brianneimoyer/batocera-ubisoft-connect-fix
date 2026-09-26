@@ -30,7 +30,11 @@
 #       excluded by filtering out "Ubisoft Game Launcher".
 #     - The in-prefix Windows Steam API shim
 #       (c:\windows\system32\steam.exe): excluded by filtering out
-#       that specific path, since it can outlive the real game.
+#       that path ANYWHERE in the command line, not just as a prefix
+#       -- it can appear either as the directly-invoked binary, or
+#       wrapped in an explicit "wine c:\windows\system32\steam.exe"
+#       invocation, both of which show up at different points during
+#       Ubisoft Connect's own startup sequence.
 #   What's left after all three exclusions is the actual game binary
 #   itself (e.g. S:\steamapps\common\<Game>\<Game>.exe).
 #
@@ -62,7 +66,7 @@ game_running() {
         if [[ "$cmd" == *"-uplay_steam_mode"* ]] \
             && [[ "$cmd" != *"Ubisoft Game Launcher"* ]] \
             && [[ "$cmd" != *"waitforexitandrun"* ]] \
-            && [[ "$lc" != c:*windows*system32*steam.exe* ]]; then
+            && [[ "$lc" != *c:*windows*system32*steam.exe* ]]; then
             log "MATCH: $cmd"
             return 0
         fi
