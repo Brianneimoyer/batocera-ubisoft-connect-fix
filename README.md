@@ -1,5 +1,18 @@
 # Batocera + Steam/Ubisoft Connect fixes
 
+## Disclaimer
+
+These scripts modify a system file (`/usr/bin/batocera-steam`) and
+force-kill processes matching certain patterns. Tested only on
+Batocera 43.1 (2026/05/29 build) with an NVIDIA RTX 5080. Behavior
+on other Batocera versions, hardware, or Steam/Proton builds is not
+guaranteed.
+
+Use at your own risk. No warranty of any kind. Read the scripts
+before running them, especially the `pkill -f "steam.exe"` pattern
+noted under Known Limitation above — verify it doesn't match anything
+unexpected on your own system before relying on it.
+
 Two independent fixes for Batocera's Flatpak Steam integration,
 developed and tested on Batocera 43.1 (2026/05/29 build) with an
 RTX 5080 / NVIDIA 590.48.1.0 driver.
